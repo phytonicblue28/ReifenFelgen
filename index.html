@@ -324,18 +324,18 @@ textarea{
                 placeholder="z. B. 215/65 R19"
             >
 
-            <label>Geschwindigkeitsindex</label>
-            <input
-                type="text"
-                id="geschwindigkeit"
-                placeholder="z. B. H, V"
-            >
-
             <label>Tragfähigkeitsindex</label>
             <input
                 type="text"
                 id="tragfaehigkeit"
                 placeholder="z. B. 99, 102"
+            >
+            
+            <label>Geschwindigkeitsindex</label>
+            <input
+             type="text"
+            id="geschwindigkeit"
+             placeholder="z. B. H, V"
             >
 
             <label>Reifenmarke</label>
@@ -625,6 +625,7 @@ function updateText(){
     let load =
         document.getElementById("tragfaehigkeit").value.trim();
 
+    // REIFENTEXT
     let reifen =
         (marke ? marke + " " : "") +
         (modell ? modell + " " : "") +
@@ -634,8 +635,34 @@ function updateText(){
         (speed ? speed : "");
 
     let text =
-        anzahl + "x " +
-        reifen.trim() +
+        anzahl + "x " + reifen.trim();
+
+    // FELGENDATEN
+   let felgenArt =
+    document.getElementById("felgen_art").value.trim();
+
+let felgenGroesse =
+    document.getElementById("felgen_groesse").value.trim();
+
+let felgenMarke =
+    document.getElementById("felgen_marke").value.trim();
+
+let felgenAnzahl =
+    document.getElementById("felgen_anzahl").value || "1";
+
+    // FELGEN NUR HINZUFÜGEN WENN ETWAS EINGEGEBEN WURDE
+    if(felgenGroesse !== ""){
+
+        text +=
+    " und\n" +
+    felgenAnzahl + "x " +
+    (felgenMarke ? felgenMarke + " " : "") +
+    felgenArt + " " +
+    felgenGroesse;
+    }
+
+    // ABSCHLUSS
+    text +=
         "\nkomplett mit Montage, wuchten und Ventilen";
 
     document.getElementById("textfeld").value = text.trim();
